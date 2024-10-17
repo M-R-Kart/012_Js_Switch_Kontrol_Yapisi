@@ -1,116 +1,146 @@
-//! Döngüler (Loops)
-JavaScript te döngüler, bir kod bloğunu belirli bir sayıda veya bir koşul sağlandığı 
-sürece çalıştırmak için kullanılır. While, for ve do-while döngüleri birbirine benzer, 
-ancak farklı kullanım senaryoları vardır.
+JavaScript te switch ifadesi, bir değişkenin (veya ifadenin) alabileceği değerlere göre 
+farklı kod bloklarını çalıştırmak için kullanılır. Özellikle, birçok if...else if koşulunu 
+arka arkaya yazmak yerine daha temiz ve anlaşılır bir yapı sunar. 
+switch, bir değerle eşleşen bir durum bulduğunda o duruma ait kod bloğunu yürütür ve 
+programın geri kalanını atlayabilir.
 
-//! 1. While Döngüsü
-While döngüsü, belirtilen koşul doğru olduğu sürece çalışır. 
-Eğer koşul baştan yanlışsa, döngü hiç çalışmayabilir.
+//! SWİTCH YAPISININ GENEL KULLANIMI
 
-  //? Örnek:
+  switch (değişken) {
+    case değer1:
+        // Eğer 'değişken' değer1'e eşitse, bu kod çalışır.
+        break; // Bu bloğun ardından diğer durumlara geçilmesini engeller.
+    
+    case değer2:
+        // Eğer 'değişken' değer2'ye eşitse, bu kod çalışır.
+        break;
+    
+    default:
+        // Hiçbir 'case' durumu ile eşleşmezse, bu kod çalışır.
+  }
 
-    let i = 0;
-    while (i < 5) {
-      console.log(i);
-      i++;
+  //! ************************************************
+
+  //! Örnek:
+
+    let islem = 3;
+
+    switch (islem) {
+      case 1:
+        console.log("1 nolu işlem yapıldı");
+        break;
+      case 2:
+        console.log("2 nolu işlem yapıldı");
+        break;
+      case 3:
+        console.log("3 nolu işlem yapıldı");
+        break;
+      default:
+        console.log("İşlem yapılmadı");
+    }
+    //* Çıktı: "3 nolu işlem yapıldı"
+    
+  //! ************************************************
+  
+  //! Örnek:
+
+    let day = 6;
+
+    switch (day) {
+      case 1:
+        console.log("Pazartesi");
+        break;
+      case 2:
+        console.log("Salı");
+        break;
+      case 3:
+        console.log("Çarşamba");
+        break;
+      case 4:
+        console.log("Perşembe");
+        break;
+      case 5:
+        console.log("Cuma");
+        break;
+      default:
+        console.log("Hafta Sonu");
     }
     
-    * Bu kod, i 5 ten küçük olduğu sürece i yi konsola yazdırır ve her seferinde i yi 1 artırır.
-
+    //* Çıktı: "Hafta Sonu"
+    
   //! ************************************************
 
-  //? Örnek:
+  //! Örnek:
 
-    let i = 10;
-    while (i > 0) {
-      console.log(i);
-      i--;
-    }
-  
-  //! ************************************************
+    let saat = 25;
 
-  //!  Break ve Continue
-
-  //? Örnek:
-
-    let i = 0;
-    while (i < 10) {
-      console.log(i);
-      if (i == 6) { //döngü if komutunu karşıladığında break komutu döngüyü sonlandırır.
+    switch (true) {
+      case saat >= 0 && saat <= 7:
+        console.log("İyi Geceler");
         break;
-      }
-      i++;
+      case saat >= 8 && saat <= 11:
+        console.log("Günaydın");
+        break;
+      case saat >= 12 && saat <= 17:
+        console.log("İyi Günler");
+        break;
+      case saat >= 18 && saat <= 24:
+        console.log("İyi Akşamlar");
+        break;
+      default:
+        console.log(alert("Geçersiz saat dilim"));
+        console.log("Geçersiz saat dilimi");
     }
-
+    
+    //* Alert Çıktı: "Geçersiz saat dilimi"
+    //* Çıktı: "Geçersiz saat dilimi"
+    
   //! ************************************************
 
-  //? Örnek:
+Açıklamalar
+  (1) switch ifadesi= Burada switch, gun değişkenine bağlı olarak hangi kod bloğunun 
+                  çalıştırılacağını belirler.
+  (2) case durumları= gun değişkeninin değerine göre bir eşleşme bulunur. 
+                  Örneğin, gun 3 olduğunda, "Çarşamba" yazdırılır.
+  (3) break anahtarı= Bir case durumunda eşleşme bulunduktan sonra, 
+                  break ifadesi kullanılarak switch yapısından çıkılır. 
+                  Eğer break kullanılmazsa, aşağıdaki tüm case blokları çalıştırılır 
+                  (bu duruma "fall-through" denir).
+  (4) default bloğu= Hiçbir case durumuyla eşleşme olmazsa, default bloğu çalıştırılır.
 
-    let i = 0;
-    while (i < 10) {
-      console.log(i);
-      if (i == 6) {
-        continue; // if değeri karşılanmadan tekrar baştan alır sonsuz döngüye döner.
-      }
-      i++;
+//! //////////////////////////////////////////////////////////////////////////////////////////
+
+//! SWİTCH İLE EŞİTLİK KARŞILAŞTIRMA
+switch yapısı, katı eşitlik (===) kullanır, yani değerlerin tipi de kontrol edilir.
+
+  //! Örnek:
+
+    let deger = '5';
+
+    switch (deger) {
+        case 5:
+            console.log("Sayı 5");
+            break;
+        case '5':
+            console.log("String 5");
+            break;
     }
 
-//! /////////////////////////////////////////////////////////////////////////////////////////
+    // Çıktı: "String 5"
+    -Bu örnekte deger değişkeni bir string olduğu için case '5' durumu ile eşleşir, 
+    ancak case 5 durumu ile eşleşmez.
 
-//! 2. For Döngüsü
-For döngüsü, daha çok belirli bir sayıda işlem yapmak için kullanılır. 
-Başlatma, koşul ve artırma/değiştirme işlemleri döngünün başında tanımlanır.
+//! //////////////////////////////////////////////////////////////////////////////////////////
 
-//? Örnek
+// SWİTCH YAPISININ AVANTAJLARI
 
-  for (let i = 0; i < 5; i++) { // önce i değeri sonra koşul sonra değeri arttırıyoruz.
-    console.log(i);
-  }
+    (1) Çok sayıda if...else if kullanmak yerine daha okunabilir ve düzenli bir yapı sağlar.
+    (2) Farklı durumlar için aynı kod bloğunu çalıştırmak gerektiğinde, fall-through 
+    (yani break kullanmadan) yaklaşımını kolayca kullanabilirsin.
 
-//! ************************************************
+// ÖZET
 
-//? Örnek:
-
-for (let i = 0; i < 10; i++) {
-  if (i == 5) {
-    console.log("Seçilen Rakam:" + i);
-    continue;
-  }
-  console.log(i);
-}
-
-//! ************************************************
-
-//? Örnek: 1 den 10 a kadar olan sayıların toplamı
-
-let toplam = 0;
-for (let i = 1; i < 10; i++) {
-  toplam = toplam + i;
-}
-console.log(toplam);
-
-//! ************************************************
-
-//? Örnek: 1 den 10 a kadar olan sayıların çarpımı
-
-let sonuc = 1;
-for (let i = 1; i < 10; i++) {
-  sonuc = sonuc * i;
-}
-console.log(sonuc);
-
-//! /////////////////////////////////////////////////////////////////////////////////////////
-
-//! 3. Do-While Döngüsü
-
-Do-while döngüsü, önce kod bloğunu bir kez çalıştırır, ardından koşulu kontrol eder. 
-Yani koşul baştan yanlış bile olsa döngü en az bir kez çalışır.
-
-//? Örnek: Bu örnekte de yine i'nin 0'dan 4'e kadar olan değerleri konsola yazdırılır.
-
-let i = 0;
-do {
-  console.log(i);
-  i++;
-} while (i < 5);
-
+    (1) switch, bir ifadenin birkaç olası durumunu kontrol etmek için kullanılır.
+    (2) Her case durumu, belirli bir değere eşit olduğunda çalışır.
+    (3) break ifadesi, bir eşleşme bulunduktan sonra switch yapısından çıkılmasını sağlar.
+    (4) default bloğu, hiçbir case durumu ile eşleşmezse çalışır.
